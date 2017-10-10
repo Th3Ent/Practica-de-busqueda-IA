@@ -15,21 +15,24 @@ int main(){
         cout<<endl;
     system("clear");
     
-    int n_filas = 20, n_columnas = 20, n_obstaculos = 50, opc = 1;
-    
+    int n_filas = 100, n_columnas =100, n_obstaculos = 75, opc = 2;
+    int porcentaje = 20;
+    do{
     cout << "\nIntroduzca número de filas: ";
-     cin >> n_filas;
+    cin >> n_filas;
     cout << "\nIntroduzca número de columnas: ";
-     cin >> n_columnas;
-    
-    int x_ini = 1, x_fin = 20, y_ini = 1, y_fin = 20;
+    cin >> n_columnas;
+    if(n_columnas>=73)
+        cout<<"\nDemasiadas columnas, no se mostrara bien por pantalla";
+    }while(n_columnas>=73);
+    int x_ini = 1, x_fin = 5, y_ini = 1, y_fin = 5;
     do{
         
     do{
     cout << "\nIntroducir inicio.\n X: ";
-     cin >> x_ini;
+    cin >> x_ini;
     cout <<" Y: ";
-     cin >> y_ini;
+    cin >> y_ini;
     if(x_ini > n_filas || x_ini > n_columnas)
         cout<<"\nValores imposibles, estan fuera de rango ";
     }while(x_ini > n_filas || y_ini > n_columnas);//Comprueba que esten en rango
@@ -37,9 +40,9 @@ int main(){
     
     do{
     cout << "\nIntroducir fin. \n X: ";
-     cin >> x_fin;
+    cin >> x_fin;
     cout << "Y: ";
-     cin >> y_fin;
+    cin >> y_fin;
     if(x_fin > n_filas || x_fin > n_columnas)
         cout<<"\nValores imposibles, estan fuera de rango ";
     }while(x_fin > n_filas || y_fin > n_columnas);//Comprueba que esten en rango
@@ -50,35 +53,39 @@ int main(){
     
     cout << "\nDecida como quiere los obstáculos:\n1.Aleatorio\n2.Manual(porcentaje)\n3.Manual(cantidad): ";
     do{
-         cin >> opc;
+        cin >> opc;
         switch(opc){
             case 1:  
                     do{
                         cout <<"\nNumero de obstaculos: ";
-                         cin>> n_obstaculos;
+                        cin>> n_obstaculos;
                         if(n_obstaculos > n_filas*n_columnas - 2)
                             cout<<"\n Demasiados obstaculos, el maximo son "<<n_filas*n_columnas;
                     }while(n_obstaculos > n_filas*n_columnas - 2);
                     citi.aleatorio(n_obstaculos);
                     break;
-            case 2: cout << "\nIntroduce porcentaje: ";
-                    int porcentaje;
-                    while(porcentaje > 101){
+                    
+            case 2: 
+                    cout << "\nIntroduce porcentaje: ";
+                    
+                    do{
                     cin >> porcentaje;
                     if(porcentaje > 101)
                         cout<<"\n El porcentaje maximo es 100% no "<<porcentaje;
-                    }
+                    }while(porcentaje > 101);
                     n_obstaculos = (n_columnas*n_filas*porcentaje)/100;
                     if(n_obstaculos == n_columnas*n_filas)
                         n_obstaculos = n_obstaculos-2;
                     
                     citi.aleatorio(n_obstaculos);
                     break;
+                    
             case 3: cout << "\nNúmero de obstáculos: ";
                     cin >> n_obstaculos;
                     citi.manu_alea(n_obstaculos);
                     break;
             default: cout << "\nOpción incorrecta, escoja otra" << endl;
+                     break;
         }
     }while(opc > 3 || opc < 1);
     
@@ -91,25 +98,28 @@ int main(){
     system("clear");
     citi.pintar_ciudad();
     do{
-    
-    
     usleep(50000);
     
-    initscr();
+    /*initscr();
 	nodelay(stdscr,TRUE);
 	keypad(stdscr,TRUE);
 	echo();
-	
     mov = getch();
     refresh();
-    endwin();
+    endwin();*/
+    cin>>mov;
     
-    
-    if(mov != 'q' &&  mov!= ERR){
-    fin = citi.mover_carro(mov);
-    system("clear");
-    citi.pintar_ciudad();
-    }
+    if(mov == 'p' &&  mov!= ERR)
+        citi.realeatorio(n_obstaculos);
+    else if(mov == 'P' &&  mov!= ERR)
+         citi.realeatorio(n_obstaculos, x_ini-1, y_ini-1);
+         else if(mov == 'o' &&  mov!= ERR)
+                citi.set_obstac();
+             else if(mov != 'q' &&  mov!= ERR){
+                    fin = citi.mover_carro(mov);
+                    system("clear");
+                    citi.pintar_ciudad();
+                 }
     }while(!(fin || mov == 'q'));
     if(fin)
         cout<<"\nFELICIDADES! LLEGASTE AL DESTINO\n\n";
