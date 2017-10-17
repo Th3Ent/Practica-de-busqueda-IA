@@ -100,13 +100,6 @@ int main(){
     do{
     usleep(50000);
     
-    /*initscr();
-	nodelay(stdscr,TRUE);
-	keypad(stdscr,TRUE);
-	echo();
-    //mov = getch();
-    refresh();
-    endwin();*/
     cin>>mov;
     
     if(mov == 'p' &&  mov!= ERR)

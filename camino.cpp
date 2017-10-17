@@ -4,7 +4,7 @@
         escr = ' ';
     }
         
-     int camino::que_soy(){
+    int camino::que_soy(){
         return 0;
     }
         
@@ -15,12 +15,12 @@
 
 //·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~
     
-    estela::estela( char q){
-        escr = q;
+    estela::estela(){
+        escr = '8';
     }
     
     ostream& estela::print(ostream& os){
-        os <<KSRED" "<<escr;
+        os <<KSRED" \xc2\xb7";
         return os;
     }
     
@@ -73,8 +73,18 @@
     int fin::que_soy(){
         return 4;
     }
-
     
+//·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~
+
+    obstaculo_ficticio::obstaculo_ficticio(){
+        escr = ' ';
+    }
     
-
-
+    ostream& obstaculo_ficticio::print(ostream& os){
+        os << " " << escr;
+        return os;
+    }
+    
+    int obstaculo_ficticio::que_soy(){
+        return 5;
+    }

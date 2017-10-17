@@ -1,5 +1,9 @@
 #include <iostream>
-using namespace std;
+#include <stdlib.h>
+#include <unistd.h>
+#include <vector>
+#include <stack>
+#include <cmath>
 
 #define KBLU "\x1B[34m"
 #define KWHT "\x1B[37m"
@@ -9,11 +13,15 @@ using namespace std;
 #define KYEL "\x1B[33m"
 #define KCYN "\x1B[36m"
 #define KSRED "\x1B[91m"
+#define INF 9999
 
+using namespace std;
 
-#include <vector>
+typedef struct{
+    int x;
+    int y;
+}punto;
 
-#include <stdlib.h>
 class camino{
     
     public:
@@ -66,10 +74,20 @@ class estela: public camino{
     
     public:
     
-    estela( char q);
+    estela();
     
     ostream& print(ostream& os);
     
     int que_soy();
 };
 
+class obstaculo_ficticio: public camino{    //Cuando desde ese punto no hay solucion
+    
+    public:
+    
+    obstaculo_ficticio();
+    
+    ostream& print(ostream& os);
+    
+    int que_soy();
+};
